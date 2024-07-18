@@ -1,0 +1,8 @@
+maybe create a config for server which contains:
+
+- hostname (String)
+- port (u16)
+- webhook (String)
+- run as admin! (bool)
+
+where `!` means mandatory field and rest of the field with no suffix are optional
