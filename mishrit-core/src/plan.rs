@@ -1,5 +1,4 @@
 use serde::Deserialize;
-use crate::is_default;
 
 #[derive(Debug, Deserialize)]
 pub struct ContainerId(String);

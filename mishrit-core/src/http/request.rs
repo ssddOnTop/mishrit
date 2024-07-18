@@ -1,7 +1,7 @@
+use crate::plan::Plan;
 use bytes::Bytes;
 use http_body_util::BodyExt;
 use hyper::{HeaderMap, Method, Uri, Version};
-use crate::plan::Plan;
 
 #[derive(Default)]
 pub struct Request<Body> {
@@ -14,7 +14,13 @@ pub struct Request<Body> {
 
 impl<Body> Request<Body> {
     pub fn new(headers: HeaderMap, body: Body) -> Self {
-        Self { method: Default::default(), uri: Default::default(), version: Default::default(), headers, body,  }
+        Self {
+            method: Default::default(),
+            uri: Default::default(),
+            version: Default::default(),
+            headers,
+            body,
+        }
     }
 }
 
