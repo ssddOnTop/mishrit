@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#highly inspired by https://github.com/tailcallhq/tailcall/blob/main/lint.sh
+
 run_cargo_fmt() {
     MODE=$1
     if [ "$MODE" == "check" ]; then
