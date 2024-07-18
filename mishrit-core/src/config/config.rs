@@ -1,3 +1,4 @@
+use crate::config::source::Source;
 use crate::is_default;
 use serde::{Deserialize, Serialize};
 
@@ -30,4 +31,20 @@ pub struct ServerConfig {
     #[serde(default, skip_serializing_if = "is_default")]
     /// Should the server ask for admin permission
     pub admin: Option<bool>,
+}
+
+impl Config {
+    pub fn from_source(source: Source, schema: &str) -> anyhow::Result<Self> {
+        match source {
+            Source::Json => Ok(Config::from_json(schema)?),
+            Source::Yml => Ok(Config::from_yaml(schema)?),
+        }
+    }
+    pub fn from_json(json: &str) -> anyhow::Result<Self> {
+        Ok(serde_json::from_str(json)?)
+    }
+
+    pub fn from_yaml(yaml: &str) -> anyhow::Result<Self> {
+        Ok(serde_yaml::from_str(yaml)?)
+    }
 }
