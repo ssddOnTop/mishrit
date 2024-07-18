@@ -14,7 +14,7 @@ pub struct Request<Body> {
 
 impl<Body> Request<Body> {
     pub fn new(headers: HeaderMap, body: Body) -> Self {
-        Self { headers, body, ..Default::default() }
+        Self { method: Default::default(), uri: Default::default(), version: Default::default(), headers, body,  }
     }
 }
 

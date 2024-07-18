@@ -1,10 +1,10 @@
 [package]
-name = "docmanager"
+name = "mishrit"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-doc-core = { path = "doc-core" }
+doc-core = { path = "mishrit-core" }
 
 [workspace]
-members = ["doc-core"]
+members = ["mishrit-core"]
