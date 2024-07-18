@@ -5,4 +5,8 @@ maybe create a config for server which contains:
 - webhook (String)
 - run as admin! (bool)
 
+Future:
+- Cert and Key
+- Http2 support
+
 where `!` means mandatory field and rest of the field with no suffix are optional
