@@ -15,6 +15,14 @@ reqwest = "0.12.5"
 derive_setters = "0.1.6"
 thiserror = "1.0.63"
 serde_yaml = "0.9.34+deprecated"
+url = "2.5.2"
+tracing = "0.1.40"
+num_cpus = "1.16.0"
+serde_path_to_error = "0.1.16"
+regex = "1.10.5"
 
 [dev-dependencies]
 tokio = {version = "1.38.1", features = ["macros"]}
+pretty_assertions = "1.4.0"
+stripmargin = "0.1.1"
+

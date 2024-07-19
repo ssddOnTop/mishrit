@@ -1,5 +1,5 @@
 mod config;
-mod reader;
-mod source;
+pub mod reader;
+pub mod source;
 
 pub use config::*;

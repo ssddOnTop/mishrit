@@ -7,11 +7,18 @@ use serde::{Deserialize, Serialize};
 pub struct Config {
     /// Server configuration.
     #[serde(default, skip_serializing_if = "is_default")]
-    pub server: Option<ServerConfig>,
+    pub server: Server,
 }
 
 #[derive(Default, Clone, Deserialize, Serialize, PartialEq)]
-pub struct ServerConfig {
+pub enum HttpVersion {
+    #[default]
+    HTTP1,
+    HTTP2,
+}
+
+#[derive(Default, Clone, Deserialize, Serialize, PartialEq)]
+pub struct Server {
     #[serde(default, skip_serializing_if = "is_default")]
     /// The hostname to bind to.
     pub hostname: Option<String>,
@@ -21,16 +28,14 @@ pub struct ServerConfig {
     pub port: Option<u16>,
 
     #[serde(default, skip_serializing_if = "is_default")]
-    /// Webhook url to for logging based on log level.
-    pub webhook: Option<String>,
+    /// `version` sets the HTTP version for the server. Options are `HTTP1` and
+    /// `HTTP2`. @default `HTTP1`.
+    pub version: Option<HttpVersion>,
 
     #[serde(default, skip_serializing_if = "is_default")]
-    /// Log level for the server.
-    pub log_level: Option<String>,
-
-    #[serde(default, skip_serializing_if = "is_default")]
-    /// Should the server ask for admin permission
-    pub admin: Option<bool>,
+    /// `workers` sets the number of worker threads. @default the number of
+    /// system cores.
+    pub workers: Option<usize>,
 }
 
 impl Config {
@@ -46,5 +51,22 @@ impl Config {
 
     pub fn from_yaml(yaml: &str) -> anyhow::Result<Self> {
         Ok(serde_yaml::from_str(yaml)?)
+    }
+}
+
+impl Server {
+    pub fn get_hostname(&self) -> &str {
+        self.hostname.as_deref().unwrap_or("localhost")
+    }
+
+    pub fn get_port(&self) -> u16 {
+        self.port.unwrap_or(19194)
+    }
+
+    pub fn get_version(&self) -> HttpVersion {
+        self.version.clone().unwrap_or_default()
+    }
+    pub fn get_workers(&self) -> usize {
+        self.workers.unwrap_or(num_cpus::get())
     }
 }
