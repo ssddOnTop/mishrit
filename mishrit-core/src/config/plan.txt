@@ -3,7 +3,6 @@ maybe create a config for server which contains:
 - hostname (String)
 - port (u16)
 - webhook (String)
-- run as admin! (bool)
 
 Future:
 - Cert and Key
